@@ -5,6 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:paddingLeft="40dp"
         android:paddingRight="40dp"
+        app:topMaxOffsetY="120dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".MainActivity">
@@ -12,20 +13,21 @@
     <TextView
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            app:topMaxOffsetY="0dp"
             android:text="Hello World!"
             android:background="#389890"
     />
 
     <View android:layout_width="match_parent"
           android:layout_height="150dp"
-          app:maxOffsetY="20dp"
+          app:bottomMaxOffsetY="20dp"
           android:layout_marginTop="20dp"
           android:background="#832193"
     />
 
     <View android:layout_width="match_parent"
           android:layout_height="150dp"
-          app:maxOffsetY="20dp"
+          app:bottomMaxOffsetY="20dp"
           android:layout_marginTop="20dp"
           android:background="#C7F016"
     />

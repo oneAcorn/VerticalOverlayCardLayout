@@ -17,7 +17,8 @@ import kotlin.math.min
  */
 class VerticalOverlayCardLayout : LinearLayout {
     private var lastY: Float = 0f
-    private val minOffset = -120
+    private var layoutTopMaxOffsetY: Float = 0f
+    private var layoutBottomMaxOffsetY: Float = 0f
 
     constructor(context: Context) : this(context, null)
 
@@ -25,6 +26,19 @@ class VerticalOverlayCardLayout : LinearLayout {
 
     constructor(context: Context, attr: AttributeSet?, defStyleAttr: Int) : super(context, attr, defStyleAttr) {
         orientation = VERTICAL
+        context.obtainStyledAttributes(attr, R.styleable.VerticalOverlayCardLayout_Layout).apply {
+            setTopMaxOffsetY(getDimension(R.styleable.VerticalOverlayCardLayout_Layout_topMaxOffsetY, 0f))
+            setBottomMaxOffsetY(getDimension(R.styleable.VerticalOverlayCardLayout_Layout_bottomMaxOffsetY, 0f))
+            recycle()
+        }
+    }
+
+    fun setTopMaxOffsetY(offsetY: Float) {
+        this.layoutTopMaxOffsetY = offsetY
+    }
+
+    fun setBottomMaxOffsetY(offsetY: Float) {
+        this.layoutBottomMaxOffsetY = offsetY
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -43,19 +57,24 @@ class VerticalOverlayCardLayout : LinearLayout {
     }
 
     private fun onDragging(event: MotionEvent) {
-        val offsetY = (event.y - lastY) / 5f
+        val offsetY = (event.y - lastY) / 2f
         log("onDragging offsetY:$offsetY,currentY:${event.y},lastY:$lastY")
         lastY = event.y
         for (i in 0 until childCount) {
             val childView = getChildAt(i)
             val topMargin = (childView.layoutParams as? LayoutParams)?.topMargin ?: continue
-            val maxMargin: Int? = (childView.layoutParams as? LayoutParams)?.maxOffsetY?.toInt() ?: continue
+            val childLp = (childView.layoutParams as? LayoutParams)
+            val topMaxOffsetY: Int =
+                0 - (if (childLp == null || childLp.topMaxOffsetY < 0) layoutTopMaxOffsetY.toInt() else childLp.topMaxOffsetY.toInt())
+            val bottomMaxOffsetY: Int =
+                if (childLp == null || childLp.bottomMaxOffsetY < 0) layoutBottomMaxOffsetY.toInt() else childLp.bottomMaxOffsetY.toInt()
             var offsetMargin = topMargin + offsetY.toInt()
-            offsetMargin = if (offsetMargin > 0) min(offsetMargin, maxMargin!!) else max(offsetMargin, minOffset)
+            offsetMargin =
+                if (offsetMargin > 0) min(offsetMargin, bottomMaxOffsetY) else max(offsetMargin, topMaxOffsetY)
             val lp = childView.layoutParams as? LayoutParams
             lp?.topMargin = offsetMargin
             childView.layoutParams = lp
-            log("onDragging offsetMargin: $offsetMargin")
+            log("onDragging offsetMargin: $offsetMargin,topMax:$topMaxOffsetY,bottomMax:$bottomMaxOffsetY")
         }
     }
 
@@ -89,20 +108,26 @@ class VerticalOverlayCardLayout : LinearLayout {
     }
 
     class LayoutParams : LinearLayout.LayoutParams {
-        var maxOffsetY: Float = 0f
+        //向上拖动时,最大拖动topMargin
+        var topMaxOffsetY: Float = 0f
+        //向下拖动时,最大拖动topMargin
+        var bottomMaxOffsetY: Float = 0f
 
         constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
             val a = context.obtainStyledAttributes(attrs, R.styleable.VerticalOverlayCardLayout_Layout)
-            maxOffsetY = a.getDimension(R.styleable.VerticalOverlayCardLayout_Layout_maxOffsetY, 0f)
+            topMaxOffsetY = a.getDimension(R.styleable.VerticalOverlayCardLayout_Layout_topMaxOffsetY, -1f)
+            bottomMaxOffsetY = a.getDimension(R.styleable.VerticalOverlayCardLayout_Layout_bottomMaxOffsetY, -1f)
             a.recycle()
         }
 
         constructor(width: Int, height: Int) : super(width, height) {
-            maxOffsetY = 0f
+            topMaxOffsetY = 0f
+            bottomMaxOffsetY = 0f
         }
 
         constructor(width: Int, height: Int, weight: Float) : super(width, height, weight) {
-            maxOffsetY = 0f
+            topMaxOffsetY = 0f
+            bottomMaxOffsetY = 0f
         }
 
         constructor(lp: ViewGroup.LayoutParams) : super(lp)
@@ -111,7 +136,7 @@ class VerticalOverlayCardLayout : LinearLayout {
 
         @RequiresApi(Build.VERSION_CODES.KITKAT)
         constructor(lp: LayoutParams) : super(lp) {
-            this.maxOffsetY = lp.maxOffsetY
+            this.bottomMaxOffsetY = lp.bottomMaxOffsetY
         }
     }
 }

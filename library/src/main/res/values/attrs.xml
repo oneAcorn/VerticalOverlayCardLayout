@@ -2,6 +2,7 @@
 <resources>
     <item type="id" name="overlay_tag_key"/>
     <declare-styleable name="VerticalOverlayCardLayout_Layout">
-        <attr name="maxOffsetY" format="dimension"/>
+        <attr name="topMaxOffsetY" format="dimension"/>
+        <attr name="bottomMaxOffsetY" format="dimension"/>
     </declare-styleable>
 </resources>
