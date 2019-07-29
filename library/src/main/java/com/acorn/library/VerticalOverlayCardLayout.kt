@@ -50,11 +50,6 @@ class VerticalOverlayCardLayout : LinearLayout {
             val childView = getChildAt(i)
             val topMargin = (childView.layoutParams as? LayoutParams)?.topMargin ?: continue
             val maxMargin: Int? = (childView.layoutParams as? LayoutParams)?.maxOffsetY?.toInt() ?: continue
-//            if (childView.getTag(R.id.overlay_tag_key) == null) {
-//                childView.setTag(R.id.overlay_tag_key, topMargin)
-//                maxMargin = topMargin
-//            }
-//            maxMargin = 0
             var offsetMargin = topMargin + offsetY.toInt()
             offsetMargin = if (offsetMargin > 0) min(offsetMargin, maxMargin!!) else max(offsetMargin, minOffset)
             val lp = childView.layoutParams as? LayoutParams
@@ -65,10 +60,6 @@ class VerticalOverlayCardLayout : LinearLayout {
     }
 
     private fun stopDragging(event: MotionEvent) {
-        for (i in 0 until childCount) {
-            val childView = getChildAt(i)
-            childView.setTag(R.id.overlay_tag_key, null)
-        }
     }
 
     private fun log(str: String) {
