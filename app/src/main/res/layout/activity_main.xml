@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.acorn.library.VerticalOverlayCardLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+    <TextView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:text="Hello World!"
+            android:background="#389890"
+    />
+
+    <View android:layout_width="match_parent"
+          android:layout_height="150dp"
+          app:maxOffsetY="20dp"
+          android:layout_marginTop="20dp"
+          android:background="#832193"
+    />
+
+    <View android:layout_width="match_parent"
+          android:layout_height="150dp"
+          app:maxOffsetY="20dp"
+          android:layout_marginTop="20dp"
+          android:background="#C7F016"
+    />
+
+</com.acorn.library.VerticalOverlayCardLayout>

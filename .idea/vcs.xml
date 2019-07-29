@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/NumberProgressBar/NumberProgressBar" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PieView/cakeview" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/PopCard" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/TestAnything" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/WeightDialView/WeightDialView-master" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/anko-example/SfMultiModule" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/anko-example/anko-example" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/co-store-facepay-826043" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/co-store-toolapp-826043" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/hongyang_NestedScrollingDemo/Android-StickyNavLayout" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/interpolater/EaseAnimationInterpolator" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/lianlian_payDemo/LLP-Android-SDK" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/payDemo/pingpp-android" vcs="Git" />
+  </component>
+</project>

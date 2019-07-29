@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="overlay_tag_key"/>
+    <declare-styleable name="VerticalOverlayCardLayout_Layout">
+        <attr name="maxOffsetY" format="dimension"/>
+    </declare-styleable>
+</resources>
