@@ -153,7 +153,7 @@ class VerticalOverlayCardLayout : LinearLayout {
                 val topMaxOffsetY = getTopMaxOffsetY(childView)
                 val bottomMaxOffsetY = getBottomMaxOfffsetY(childView)
                 val fromOffset: Float = bottomMaxOffsetY - (bottomMaxOffsetY - topMaxOffsetY) * (1f - childDragRate)
-                val inertiaOffset = fromOffset + velocityY / 70f
+                val inertiaOffset = fromOffset + velocityY / 40f
                 val toOffset: Float =
                     if (velocityY > 0) min(inertiaOffset, bottomMaxOffsetY) else max(inertiaOffset, topMaxOffsetY)
                 valueHolders[i] = PropertyValuesHolder.ofFloat("offset$i", fromOffset, toOffset)
